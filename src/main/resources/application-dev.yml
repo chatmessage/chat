@@ -1,0 +1,39 @@
+spring:
+    profiles:
+        active: dev
+    devtools:
+        restart:
+            enabled: true
+            additional-exclude: .h2.server.properties
+        livereload:
+            enabled: false
+    jackson:
+        serialization:
+            indent-output: true
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:h2:file:./target/h2db/db/chat;DB_CLOSE_DELAY=-1
+        username: chat
+        password:
+        hikari:
+            poolName: Hikari
+            auto-commit: false
+    h2:
+        console:
+            enabled: false
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        show-sql: true
+        properties:
+            hibernate.id.new_generator_mappings: true
+            hibernate.connection.provider_disables_autocommit: true
+            hibernate.generate_statistics: true
+    messages:
+        cache-duration: PT1S
+    thymeleaf:
+        cache: false
+
+server:
+    port: 8080
+
+# application:
