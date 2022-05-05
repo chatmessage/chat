@@ -1,19 +1,21 @@
 package ru.rgordeev.chat;
 
-import ru.rgordeev.chat.entities.User;
-import ru.rgordeev.chat.repositories.UserRepository;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
+import ru.rgordeev.chat.entities.User;
+import ru.rgordeev.chat.repositories.UserRepository;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
+@ActiveProfiles(profiles = {"test"})
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @EnableTransactionManagement
 public class UserRepositoryTest {
@@ -28,8 +30,8 @@ public class UserRepositoryTest {
         userRepository.save(user);
 
         List<User> users = userRepository.findAll();
-        Assert.assertFalse(users.isEmpty());
+        Assertions.assertFalse(users.isEmpty());
 
-        System.out.println(user.toString());
+        System.out.println(user);
     }
 }

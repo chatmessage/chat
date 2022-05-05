@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/login")
 public class AuthController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public String login() {

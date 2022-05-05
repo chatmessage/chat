@@ -1,19 +1,21 @@
 package ru.rgordeev.chat;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 import ru.rgordeev.chat.data.UserData;
 import ru.rgordeev.chat.entities.User;
 import ru.rgordeev.chat.repositories.UserRepository;
 import ru.rgordeev.chat.services.UserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringRunner.class)
+@ActiveProfiles(profiles = {"test"})
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class UserServiceTest {
 
@@ -24,7 +26,7 @@ public class UserServiceTest {
     UserRepository userRepository;
 
     @Transactional
-    @Before
+    @BeforeEach
     public void setUp() {
         User user = new User("login");
         userRepository.save(user);
@@ -34,16 +36,16 @@ public class UserServiceTest {
     @Test
     public void requestTokenTest() {
         User u1 = userRepository.findByLogin("login");
-        Assert.assertTrue(u1 != null);
+        Assertions.assertTrue(u1 != null);
         String token1 = u1.getToken();
-        Assert.assertTrue(token1 != null);
+        Assertions.assertTrue(token1 != null);
         UserData userData1 = userService.requestToken("login");
-        Assert.assertTrue(token1.equals(userData1.getToken()));
+        Assertions.assertTrue(token1.equals(userData1.getToken()));
 
         UserData userData2 = userService.requestToken("login1");
         User u2 = userRepository.findByLogin("login1");
-        Assert.assertTrue(u2 != null);
-        Assert.assertTrue(userData2.getToken().equals(u2.getToken()));
+        Assertions.assertTrue(u2 != null);
+        Assertions.assertTrue(userData2.getToken().equals(u2.getToken()));
     }
 
 }

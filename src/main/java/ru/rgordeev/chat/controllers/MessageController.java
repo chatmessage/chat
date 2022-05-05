@@ -1,8 +1,8 @@
 package ru.rgordeev.chat.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.rgordeev.chat.entities.Message;
 import ru.rgordeev.chat.services.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,8 +16,12 @@ import java.util.Map;
 @RestController
 public class MessageController {
 
+    private final MessageService messageService;
+
     @Autowired
-    private MessageService messageService;
+    public MessageController(MessageService messageService) {
+        this.messageService = messageService;
+    }
 
     @MessageMapping("/send_message")
     @SendTo("/topic/activity")

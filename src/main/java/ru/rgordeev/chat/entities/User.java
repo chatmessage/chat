@@ -1,9 +1,16 @@
 package ru.rgordeev.chat.entities;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.StringJoiner;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -15,34 +22,15 @@ public class User {
     private String token;
     private String login;
 
-    public User() {
-    }
-
     public User(String login) {
         this.login = login;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
-                "token='" + token + '\'' +
-                ", login='" + login + '\'' +
-                '}';
+        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
+                .add("token='" + token + "'")
+                .add("login='" + login + "'")
+                .toString();
     }
 }

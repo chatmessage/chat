@@ -15,8 +15,8 @@ import java.util.Map;
 @Transactional
 @Service
 public class MessageService {
-    private MessageRepository messageRepository;
-    private UserRepository userRepository;
+    private final MessageRepository messageRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public MessageService(MessageRepository messageRepository, UserRepository userRepository) {

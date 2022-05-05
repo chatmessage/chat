@@ -1,7 +1,15 @@
 package ru.rgordeev.chat.entities;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.StringJoiner;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "messages")
 public class Message {
@@ -22,44 +30,19 @@ public class Message {
     private String to;
     private String message;
 
-    public Message() {
-    }
-
     public Message(String from, String to, String message) {
         this.from = from;
         this.to = to;
         this.message = message;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
     @Override
     public String toString() {
-        return String.format(
-                "Message[id=%d, from='%s', to='%s', message='%s']",
-                id, from, to, message);
+        return new StringJoiner(", ", Message.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("from='" + from + "'")
+                .add("to='" + to + "'")
+                .add("message='" + message + "'")
+                .toString();
     }
-
 }
