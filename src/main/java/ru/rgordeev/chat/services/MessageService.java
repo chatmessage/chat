@@ -25,8 +25,8 @@ public class MessageService {
     }
 
     public Message saveAndAnswer(Message message) {
-        Message answer = new Message("Server", message.getFrom(),
-                "Hello!");
+        Message answer = new Message(message.getFrom(), message.getTo(),
+                message.getMessage());
 
         messageRepository.save(message);
         return messageRepository.save(answer);
