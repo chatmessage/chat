@@ -35,8 +35,8 @@ public class MessageController {
     @MessageMapping("/history")
     @SendTo("/topic/activity")
     @ResponseBody
-    public List<Message> getDialogHistory(@RequestBody Map<String, String> jsonToken) {
-        return messageService.history(jsonToken);
+    public List<Message> getDialogHistory(@RequestBody Map<String, String> params) {
+        return messageService.history(params);
     }
 
 }

@@ -32,13 +32,15 @@ public class MessageService {
         return messageRepository.save(answer);
     }
 
-    public List<Message> history(Map<String, String> jsonToken) {
-        User user = userRepository.findByToken(jsonToken.get("token"));
-        if (user == null) {
+    public List<Message> history(Map<String, String> params) {
+        User myself = userRepository.findByToken(params.get("token"));
+        User opponent = userRepository.findByLogin(params.get("toLogin"));
+        if (myself == null || opponent == null) {
             return new ArrayList<>();
         }
 
-        String login = user.getLogin();
-        return messageRepository.findByFromOrToOrderById(login, login);
+        String mySelfLogin = myself.getLogin();
+        String opponentLogin = opponent.getLogin();
+        return messageRepository.findByFromOrToOrderById(mySelfLogin, opponentLogin);
     }
 }
