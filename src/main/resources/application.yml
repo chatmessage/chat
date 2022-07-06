@@ -14,9 +14,6 @@ spring:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
   messages:
     basename: i18n/messages
-  mvc:
-    favicon:
-      enabled: false
   thymeleaf:
     mode: HTML
 
@@ -24,8 +21,6 @@ logging:
   level:
     org.springframework.web: DEBUG
     ru.rgordeev.chat: DEBUG
-  path: logs
-  file: logs/chat.log
 
 server:
   servlet:

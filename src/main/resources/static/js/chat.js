@@ -90,7 +90,7 @@ var chatComponent = Vue.component('bottomPanel', {
     methods: {
         send: function() {
             if(this.text !== ""){
-                var message = { message: this.text, from: login, to: "Server"}
+                var message = { message: this.text, from: login, to: "aaa"}
                 this.text = ''
                 this.addToList(message)
                 sendMessage(message)
